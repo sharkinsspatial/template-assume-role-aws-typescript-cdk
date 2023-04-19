@@ -2,6 +2,7 @@ import json
 import boto3
 import os
 
+
 def get_s3_credentials():
 
     print("Fetching S3 Credentials...")
@@ -10,14 +11,12 @@ def get_s3_credentials():
         RoleArn=os.getenv('DATA_ACCESS_ROLE_ARN'),
         RoleSessionName="assuming-data-acess-role",
     )
+    print('Done fetching credentials')
     return {
         "aws_access_key_id": response["Credentials"]["AccessKeyId"],
         "aws_secret_access_key": response["Credentials"]["SecretAccessKey"],
         "aws_session_token": response["Credentials"]["SessionToken"],
     }
-    
-    print('Done fetching credentials')
-
 
 
 def handler(event, context):
